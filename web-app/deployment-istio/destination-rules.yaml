@@ -1,0 +1,20 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: webtest-destinations
+  namespace: webtest
+spec:
+  host: webtest-service
+  trafficPolicy:
+    loadBalancer:
+      simple: ROUND_ROBIN
+  subsets:
+  - name: internal
+    labels:
+      version: internal
+  - name: release1
+    labels:
+      version: release1
+  - name: release2
+    labels:
+      version: release2

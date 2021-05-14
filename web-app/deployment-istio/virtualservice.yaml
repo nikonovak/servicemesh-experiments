@@ -1,0 +1,34 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: webtest-virtual-service
+  namespace: webtest
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - webtest-gateway
+  http:
+  - match:
+    - headers:
+        end-user:
+          exact: internal
+    route:
+    - destination:
+        port:
+          number: 80
+        host: webtest-service
+        subset: internal
+  - route:
+    - destination:
+        port:
+          number: 80
+        host: webtest-service
+        subset: release1
+      weight: 50
+    - destination:
+        port:
+          number: 80
+        host: webtest-service
+        subset: release2
+      weight: 50

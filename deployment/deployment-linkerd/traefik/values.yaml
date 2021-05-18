@@ -62,8 +62,8 @@ podDisruptionBudget:
 # Use ingressClass. Ignored if Traefik version < 2.3 / kubernetes < 1.18.x
 ingressClass:
   # true is not unit-testable yet, pending https://github.com/rancher/helm-unittest/pull/12
-  enabled: false
-  isDefaultClass: false
+  enabled: true
+  isDefaultClass: traefik-cert-manager
   # Use to force a networking.k8s.io API Version for certain CI/CD applications. E.g. "v1beta1"
   fallbackApiVersion:
 
@@ -261,11 +261,11 @@ ports:
     # Port Redirections
     # Added in 2.2, you can make permanent redirects via entrypoints.
     # https://docs.traefik.io/routing/entrypoints/#redirection
-    # redirectTo: websecure
+    redirectTo: websecure
   websecure:
     port: 8443
     # hostPort: 8443
-    expose: false
+    expose: true
     exposedPort: 443
     # The port protocol (TCP/UDP)
     protocol: TCP

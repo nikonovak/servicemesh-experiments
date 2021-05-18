@@ -5,9 +5,9 @@ metadata:
   namespace: webtest
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
-  - match: Host(`smesh.ordergroove.com`) && PathPrefix(`/`)
+  - match: Host(`webtest.playground.ordergroove.com`) && PathPrefix(`/`)
     kind: Rule
     priority: 1
     middlewares:
@@ -15,6 +15,8 @@ spec:
     services:
     - name: webtest-service
       port: 80
+  tls:
+    secretName: webtest-cert
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware

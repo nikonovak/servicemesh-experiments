@@ -1,0 +1,9 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: webtest-ingress
+  namespace: webtest
+spec:
+  backend:
+    serviceName: webtest-service
+    servicePort: 80

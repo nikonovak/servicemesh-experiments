@@ -1,0 +1,12 @@
+apiVersion: split.smi-spec.io/v1alpha1
+kind: TrafficSplit
+metadata:
+  name: webtest-service
+  namespace: webtest
+spec:
+  service: webtest-service
+  backends:
+  - service: webtest-service-v1
+    weight: 90
+  - service: webtest-service-v2
+    weight: 10

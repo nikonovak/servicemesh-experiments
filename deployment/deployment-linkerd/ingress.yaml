@@ -1,0 +1,27 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: webtest-svc
+  namespace: webtest
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`smesh.ordergroove.com`) && PathPrefix(`/`)
+    kind: Rule
+    priority: 1
+    middlewares:
+      - name: webtestheader
+    services:
+    - name: webtest-service
+      port: 80
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: webtestheader
+  namespace: webtest
+spec:
+  headers:
+    customRequestHeaders:
+      l5d-dst-override: "webtest-service.webtest.svc.cluster.local:80"

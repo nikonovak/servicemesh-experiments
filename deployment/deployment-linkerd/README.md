@@ -64,7 +64,47 @@ Patch all deployments to use linkerd mesh add annotation to all pods:
 linkerd.io/inject: enabled
 ```
 
-Add anotation to ingress controller:
+Add an annotation to the ingress controller:
 ```
 linkerd.io/inject: ingress
 ```
+
+Install certificate manager:
+```
+kubectl create namespace cert-manager
+helm3 repo add jetstack https://charts.jetstack.io
+helm3 repo update
+helm3 install \
+  cert-manager jetstack/cert-manager \
+  --namespace cert-manager \
+  --create-namespace \
+  --version v1.3.1 \
+  --set installCRDs=true
+```
+
+Create custom role:
+....
+
+Create service account
+.....
+
+Generate key
+.....
+
+Create secret from the key
+```
+kubectl create secret generic dns01-solver --from-file=key.json -n cert-manager
+```
+
+Create necessary cert-manager resources
+```
+k apply -f cert-manager/letsencrypt-staging.yaml
+k apply -f cert-manager/mycert.yaml
+```
+
+Ambassador:
+```
+helm3 repo add datawire https://www.getambassador.io
+helm3 repo update
+helm3 install ambassador --namespace ambassador datawire/ambassador --create-namespace --values ambassador/values.yaml
+helm3 upgrade ambassador --namespace ambassador datawire/ambassador --values ambassador/values.yaml

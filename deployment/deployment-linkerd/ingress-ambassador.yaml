@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-ambassador
+  namespace: webtest
+  annotations:
+    getambassador.io/config: |
+      ---
+      apiVersion: ambassador/v1
+      kind: Mapping
+      name: web-ambassador-mapping
+      service: http://webtest-service.webtest.svc.cluster.local:80
+      host: webtest.playground.ordergroove.com
+      prefix: /
+      add_linkerd_headers: true
+      ---
+      apiVersion: ambassador/v1
+      kind: Module
+      name: tls
+      config:
+        server:
+          enabled: true
+          secret: webtest-cert
+      ---
+      apiVersion: ambassador/v1
+      kind: Module
+      name: ambassador
+      config:
+        x_forwarded_proto_redirect: true
+      ---
+      apiVersion: ambassador/v1
+      kind: TLSContext
+      name: ambassador
+      secret: webtest-cert
+      hosts: ["webtest.playground.ordergroove.com"]
+spec:
+  selector:
+    app: webtest-service
+  ports:
+  - name: http
+    port: 80
+    targetPort: http
+  - name: https
+    port: 443
+    protocol: TCP
+    targetPort: 80

@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: webtest-cert
+  namespace: webtest
+spec:
+  commonName: webtest.playground.ordergroove.com
+  secretName: webtest-cert
+  dnsNames:
+    - webtest.playground.ordergroove.com
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer

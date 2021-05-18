@@ -1,5 +1,6 @@
 Description:
-Demo counter app that stores current count in the memcached instance
+Demo counter app that stores current count in the memcached instance<br>
+app running without the service mesh
 
 Pre-requsites:
 install memcached / create webtest namespace

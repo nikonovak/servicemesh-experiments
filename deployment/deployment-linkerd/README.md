@@ -136,3 +136,6 @@ helm3 repo add bitnami https://charts.bitnami.com/bitnami
 helm3 repo update
 helm3 install contour --namespace contour bitnami/contour --create-namespace --values contour/values.yaml
 helm3 upgrade contour --namespace contour bitnami/contour --create-namespace --values contour/values.yaml
+
+helm3 upgrade contour --namespace contour ~/github/charts/bitnami/contour --values contour/values.yaml
+(for now use local copy of the contour helm chart - it includes missing annotations)

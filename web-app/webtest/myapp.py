@@ -6,8 +6,7 @@ cache = base.Client(('cache-memcached', 11211))
 
 @app.route("/")
 def hello():
-    increment_my_item()
-    curcount = get_my_item()
+    curcount = increment_my_item()
     return "<h1 style='color:pink'>Service Mesh rules!!!!<br/>current count is {} </h1>".format(curcount)
 
 
@@ -18,7 +17,7 @@ def health():
 
 @app.route("/version")
 def version():
-    return "14.0.0"
+    return "15.0.0"
 
 
 def get_my_item():
@@ -32,6 +31,7 @@ def increment_my_item():
         rv = 1
     rv = int(rv) + 1
     cache.set('count', rv)
+    return rv
 
 
 if __name__ == "__main__":

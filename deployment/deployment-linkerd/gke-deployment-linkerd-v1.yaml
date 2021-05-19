@@ -7,7 +7,7 @@ metadata:
   name: webtest-v1
   namespace: webtest
 spec:
-  replicas: 4
+  replicas: 8
   selector:
     matchLabels:
       app: webtest
@@ -20,7 +20,7 @@ spec:
         version: v1
     spec:
       containers:
-      - image: gcr.io/ogplayground/webtest:v13
+      - image: gcr.io/ogplayground/webtest:v15
         imagePullPolicy: Always
         name: webtest
         ports:

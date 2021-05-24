@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: webtest-release2
-  namespace: webtest
+  namespace: webtest-istio
   labels:
     app: webtest
 spec:
@@ -20,7 +20,7 @@ spec:
       serviceAccountName: webtest-service-account
       containers:
         - name: webtest
-          image: gcr.io/ogplayground/webtest:v11
+          image: gcr.io/ogplayground/webtest:v14
           ports:
             - containerPort: 8080
           imagePullPolicy: Always

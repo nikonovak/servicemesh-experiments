@@ -2,11 +2,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: webtest-release1
-  namespace: webtest
+  namespace: webtest-istio
   labels:
     app: webtest
 spec:
-  replicas: 3
+  replicas: 8
   selector:
     matchLabels:
       app: webtest
@@ -20,7 +20,7 @@ spec:
       serviceAccountName: webtest-service-account
       containers:
         - name: webtest
-          image: gcr.io/ogplayground/webtest:v10
+          image: gcr.io/ogplayground/webtest:v15
           ports:
             - containerPort: 8080
           imagePullPolicy: Always

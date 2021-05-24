@@ -1,8 +1,8 @@
-apiVersion: networking.istio.io/v1alpha3
+apiVersion: networking.istio.io/v1beta1
 kind: Gateway
 metadata:
   name: webtest-gateway
-  namespace: webtest
+  namespace: webtest-istio
 spec:
   selector:
     istio: ingressgateway # use Istio default gateway implementation
@@ -12,4 +12,15 @@ spec:
       name: http
       protocol: HTTP
     hosts:
-    - "*"
+    - "webtest-istio.playground.ordergroove.com"
+    tls:
+      httpsRedirect: true
+  - port:
+      number: 443
+      name: https
+      protocol: HTTPS
+    hosts:
+    - "webtest-istio.playground.ordergroove.com"
+    tls:
+      mode: SIMPLE # enables HTTPS on this port
+      credentialName: webtest-cert-istio # fetches certs from Kubernetes secret

@@ -2,7 +2,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: webtest-destinations
-  namespace: webtest
+  namespace: webtest-istio
 spec:
   host: webtest-service
   trafficPolicy:

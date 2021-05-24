@@ -2,7 +2,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: webtest-virtual-service
-  namespace: webtest
+  namespace: webtest-istio
 spec:
   hosts:
   - "*"
@@ -25,10 +25,10 @@ spec:
           number: 80
         host: webtest-service
         subset: release1
-      weight: 50
+      weight: 100
     - destination:
         port:
           number: 80
         host: webtest-service
         subset: release2
-      weight: 50
+      weight: 0

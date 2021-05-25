@@ -1,0 +1,18 @@
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: web-contour
+  namespace: webtest-contour
+spec:
+  virtualhost:
+    fqdn: webtest-contour.playground.ordergroove.com
+    tls:
+      secretName: webtest-cert
+  routes:
+  - services:
+      - name: webtest-service-v1
+        port: 80
+        weight: 10
+      - name: webtest-service-v2
+        port: 80
+        weight: 90

@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: webtest-v2
+    version: v2
+  name: webtest-v2
+  namespace: webtest-contour
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: webtest
+  template:
+    metadata:
+      labels:
+        app: webtest
+        version: v2
+    spec:
+      containers:
+      - image: gcr.io/ogplayground/webtest:v14
+        imagePullPolicy: Always
+        name: webtest
+        ports:
+        - containerPort: 8080
+      serviceAccountName: webtest-service-account
+      terminationGracePeriodSeconds: 0
+---

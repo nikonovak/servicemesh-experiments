@@ -2,8 +2,20 @@ apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: webtest-ingress
-  namespace: webtest
+  namespace: webtest-classic
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: "classic"
+    networking.gke.io/managed-certificates: "classic-gke-cert"
 spec:
   backend:
     serviceName: webtest-service
     servicePort: 80
+---
+apiVersion: networking.gke.io/v1beta1
+kind: ManagedCertificate
+metadata:
+  name: classic-gke-cert
+  namespace: webtest-classic
+spec:
+  domains:
+    - webtest-classic.playground.ordergroove.com

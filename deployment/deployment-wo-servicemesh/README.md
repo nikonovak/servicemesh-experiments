@@ -5,7 +5,7 @@ app running without the service mesh
 Pre-requsites:
 install memcached / create webtest namespace
 ```
-helm3 install cache bitnami/memcached -n webtest --create-namespace
+helm3 install cache bitnami/memcached -n webtest-classic --create-namespace
 ```
 
 Build the container using a dockerfile:

@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: webtest-service
-  namespace: webtest
+  namespace: webtest-classic
   labels:
     app: webtest
     service: webtest-service
@@ -10,9 +10,11 @@ spec:
   ports:
   - port: 80
     name: http
+    protocol: TCP
     targetPort: 8080
   selector:
     app: webtest
+  type: NodePort
 ---
 apiVersion: v1
 kind: ServiceAccount

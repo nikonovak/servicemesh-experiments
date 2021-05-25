@@ -97,12 +97,14 @@ helm3 repo add datawire https://www.getambassador.io
 helm3 repo update
 helm3 install ambassador --namespace ambassador datawire/ambassador --create-namespace --values ambassador/values.yaml
 helm3 upgrade ambassador --namespace ambassador datawire/ambassador --values ambassador/values.yaml
-
+```
 Contour: (https://github.com/bitnami/charts/tree/master/bitnami/contour, https://artifacthub.io/packages/helm/bitnami/contour)
+```
 helm3 repo add bitnami https://charts.bitnami.com/bitnami
 helm3 repo update
 helm3 install contour --namespace contour bitnami/contour --create-namespace --values contour/values.yaml
 helm3 upgrade contour --namespace contour bitnami/contour --create-namespace --values contour/values.yaml
 
 helm3 upgrade contour --namespace contour ~/github/charts/bitnami/contour --values contour/values.yaml
-(for now use local copy of the contour helm chart - it includes missing annotations)
+```
+(for now we can use local copy of the contour helm chart - it includes a required missing annotation)

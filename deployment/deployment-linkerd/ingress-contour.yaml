@@ -1,0 +1,18 @@
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: web-contour
+  namespace: webtest-linkerd
+spec:
+  virtualhost:
+    fqdn: webtest.playground.ordergroove.com
+    tls:
+      secretName: webtest-cert
+  routes:
+  - requestHeadersPolicy:
+      set:
+      - name: l5d-dst-override
+        value: webtest-service.webtest-linkerd.svc.cluster.local:80
+    services:
+      - name: webtest-service
+        port: 80

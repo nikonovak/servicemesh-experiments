@@ -5,7 +5,7 @@ metadata:
     app: webtest-v2
     version: v2
   name: webtest-v2
-  namespace: webtest
+  namespace: webtest-linkerd
 spec:
   replicas: 4
   selector:

@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: webtest-service
-  namespace: webtest
+  namespace: webtest-linkerd
   labels:
     app: webtest
     service: webtest-service
@@ -13,9 +13,3 @@ spec:
     targetPort: 8080
   selector:
     app: webtest
----
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: webtest-service-account
-  namespace: webtest

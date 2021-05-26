@@ -2,7 +2,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: webtest-cert
-  namespace: webtest
+  namespace: webtest-linkerd
 spec:
   commonName: webtest.playground.ordergroove.com
   secretName: webtest-cert

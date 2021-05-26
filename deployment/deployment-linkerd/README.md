@@ -54,7 +54,7 @@ helm3 install linerd-viz linkerd/linkerd-viz -n linkerd2
 
 install memcached / create webtest namespace:
 ```
-helm3 install cache bitnami/memcached -n webtest --create-namespace
+helm3 install cache bitnami/memcached -n webtest-linkerd --create-namespace --values memcached/values.yaml
 ```
 
 install traefik:
@@ -73,7 +73,7 @@ docker build --tag gcr.io/ogplayground/webtest:v14 .
 
 Installing the app:
 ```
-k apply -f gke-deployment-linkerd-v1.yaml -f gke-deployment-linkerd-v2.yaml -f ingress.yaml -f service-v1.yaml -f service-v2.yaml -f service.yaml -f traffic-split.yaml
+k apply -f gke-deployment-linkerd-v1.yaml -f gke-deployment-linkerd-v2.yaml -f service-v1.yaml -f service-v2.yaml -f service.yaml -f traffic-split.yaml -f ingress-contour.yaml -f certs/mycert.yaml
 ```
 
 Test installation:

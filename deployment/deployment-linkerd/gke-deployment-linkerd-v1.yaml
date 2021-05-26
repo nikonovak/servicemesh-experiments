@@ -5,9 +5,9 @@ metadata:
     app: webtest-v1
     version: v1
   name: webtest-v1
-  namespace: webtest
+  namespace: webtest-linkerd
 spec:
-  replicas: 8
+  replicas: 4
   selector:
     matchLabels:
       app: webtest

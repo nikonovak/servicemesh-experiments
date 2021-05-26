@@ -2,7 +2,7 @@ apiVersion: split.smi-spec.io/v1alpha1
 kind: TrafficSplit
 metadata:
   name: webtest-service
-  namespace: webtest
+  namespace: webtest-linkerd
 spec:
   service: webtest-service
   backends:

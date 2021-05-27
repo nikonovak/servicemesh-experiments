@@ -7,7 +7,7 @@ metadata:
   name: webtest-v2
   namespace: webtest-linkerd
 spec:
-  replicas: 4
+  replicas: 2
   selector:
     matchLabels:
       app: webtest

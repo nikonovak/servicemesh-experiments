@@ -6,7 +6,7 @@ metadata:
   name: webtest-classic
   namespace: webtest-classic
 spec:
-  replicas: 2
+  replicas: 8
   selector:
     matchLabels:
       app: webtest

@@ -1,0 +1,18 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: webtest
+  namespace: webtest-istio-flagger
+spec:
+  gateways:
+  - webtest
+  hosts:
+  - webtest-istio-flagger.playground.ordergroove.com
+  http:
+  - retries:
+      attempts: 3
+      perTryTimeout: 1s
+      retryOn: gateway-error,connect-failure,refused-stream
+    route:
+    - destination:
+        host: webtest

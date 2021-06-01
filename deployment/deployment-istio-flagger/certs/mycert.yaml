@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: webtest-cert
+  namespace: istio-system # istio is looking for cert in istio-system namespace
+spec:
+  commonName: webtest-istio.playground.ordergroove.com
+  secretName: webtest-cert-istio
+  dnsNames:
+    - webtest-istio.playground.ordergroove.com
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer

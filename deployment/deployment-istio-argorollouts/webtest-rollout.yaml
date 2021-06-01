@@ -1,0 +1,48 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: webtest
+  namespace: webtest-istio-argorollouts
+  labels:
+    app: webtest
+spec:
+  strategy:
+    canary:
+      # Reference to a Service which the controller updates to point to the canary ReplicaSet
+      canaryService: webtest-canary
+      # Reference to a Service which the controller updates to point to the stable ReplicaSet
+      stableService: webtest-primary
+      trafficRouting:
+        istio:
+          virtualService:
+            # Reference to a VirtualService which the controller updates with canary weights
+            name: webtest
+            routes:
+            - webtest # At least one route is required
+  replicas: 2
+  selector:
+    matchLabels:
+      app: webtest
+  template:
+    metadata:
+      labels:
+        app: webtest
+      annotations:
+        timestamp: "2021-05-30T20:11:23-05:00"
+    spec:
+      terminationGracePeriodSeconds: 0
+      serviceAccountName: webtest-service-account
+      containers:
+      - name: webtest
+        image: gcr.io/ogplayground/webtest:canary_v7
+        ports:
+          - containerPort: 8080
+        imagePullPolicy: Always
+        volumeMounts:
+          - name: data
+            mountPath: /app/data
+            readOnly: true
+      volumes:
+        - name: data
+          configMap:
+            name: webtest

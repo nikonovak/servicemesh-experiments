@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: webtest-cm
+  labels:
+    app: webtest
+data:
+  data: ConfigMap version 9 - declaring nginx

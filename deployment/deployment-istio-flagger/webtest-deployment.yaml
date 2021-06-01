@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webtest
+  namespace: webtest-istio-flagger
+  labels:
+    app: webtest
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: webtest
+  template:
+    metadata:
+      labels:
+        app: webtest
+      annotations:
+        timestamp: "2021-05-30T20:11:22-05:00"
+    spec:
+      terminationGracePeriodSeconds: 0
+      serviceAccountName: webtest-service-account
+      containers:
+      - name: webtest
+        image: gcr.io/ogplayground/webtest:canary_v7
+        ports:
+          - containerPort: 8080
+        imagePullPolicy: Always
+        volumeMounts:
+          - name: data
+            mountPath: /app/data
+            readOnly: true
+      volumes:
+        - name: data
+          configMap:
+            name: webtest

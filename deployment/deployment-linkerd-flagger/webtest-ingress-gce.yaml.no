@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: webtest-ingress
+  namespace: webtest-linkerd-flagger
+  annotations:
+    kubernetes.io/ingress.class: "gce"
+    ingress.kubernetes.io/custom-request-headers: "l5d-dst-override: webtest.webtest-linkerd-flagger.svc.cluster.local:8080"
+    kubernetes.io/ingress.regional-static-ip-name: "webtest-linkerd-flagger"
+spec:
+  rules:
+  - host: webtest-linkerd-flagger.playground.ordergroove.com
+    http:
+      paths:
+      - backend:
+          serviceName: webtest-service
+          servicePort: 8080

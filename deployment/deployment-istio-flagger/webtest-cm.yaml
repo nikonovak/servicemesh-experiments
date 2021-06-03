@@ -5,4 +5,4 @@ metadata:
   labels:
     app: webtest
 data:
-  data: ConfigMap version 3 - starting from scratch!!!
+  data: 'ConfigMap version updated again: 3'

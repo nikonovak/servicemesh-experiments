@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: webtest
-  labels:
-    app: webtest
-data:
-  data: ConfigMap version 1 - Istio Rollouts
